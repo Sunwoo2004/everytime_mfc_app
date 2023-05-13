@@ -19,6 +19,9 @@
     <Filter Include="ScheduleManager">
       <UniqueIdentifier>{a985104e-a321-4d41-8adc-9341fb657bb0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="INILoader">
+      <UniqueIdentifier>{d1f67464-5db4-479d-a6a0-6fe9f6891f01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="everytime_mfc_app.h">
@@ -48,6 +51,9 @@
     <ClInclude Include="ScheduleManager.h">
       <Filter>ScheduleManager</Filter>
     </ClInclude>
+    <ClInclude Include="INILoader.h">
+      <Filter>INILoader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="everytime_mfc_app.cpp">
@@ -64,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="ScheduleManager.cpp">
       <Filter>ScheduleManager</Filter>
+    </ClCompile>
+    <ClCompile Include="INILoader.cpp">
+      <Filter>INILoader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

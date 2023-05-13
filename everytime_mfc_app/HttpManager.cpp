@@ -4,32 +4,6 @@
 
 using namespace std;
 
-HttpManager* HttpManager::sg_Instance = NULL;
-
-HttpManager& HttpManager::GetInstance()
-{
-	if (sg_Instance == NULL)
-	{
-		sg_Instance = new HttpManager;
-	}
-	return *sg_Instance;
-}
-
-HttpManager::HttpManager()
-{
-	Init();
-}
-
-HttpManager::~HttpManager()
-{
-
-}
-
-void HttpManager::Init()
-{
-	//string iSource = curl_httpget();
-}
-
 int writer(char* data, size_t size, size_t nmemb, string* buffer)
 {
 	int result = 0;
@@ -68,4 +42,35 @@ string curl_httpget(const string& url)
 		return "";
 	}
 	return "";
+}
+
+HttpManager* HttpManager::sg_Instance = NULL;
+
+HttpManager& HttpManager::GetInstance()
+{
+	if (sg_Instance == NULL)
+	{
+		sg_Instance = new HttpManager;
+	}
+	return *sg_Instance;
+}
+
+HttpManager::HttpManager()
+{
+	Init();
+}
+
+HttpManager::~HttpManager()
+{
+
+}
+
+void HttpManager::Init()
+{
+}
+
+const char* HttpManager::GetHTML(const char* szUrl)
+{
+	string iSource = curl_httpget(szUrl);
+	return iSource.c_str();
 }

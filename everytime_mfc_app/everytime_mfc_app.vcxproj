@@ -38,7 +38,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -188,6 +188,7 @@
     <ClInclude Include="everytime_mfc_appDlg.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="HttpManager.h" />
+    <ClInclude Include="INILoader.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ScheduleManager.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="everytime_mfc_app.cpp" />
     <ClCompile Include="everytime_mfc_appDlg.cpp" />
     <ClCompile Include="HttpManager.cpp" />
+    <ClCompile Include="INILoader.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

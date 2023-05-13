@@ -5,7 +5,7 @@
 #include "everytime_mfc_app.h"
 #include "everytime_mfc_appDlg.h"
 #include "afxdialogex.h"
-#include "HttpManager.h"
+#include "ScheduleManager.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -90,5 +90,6 @@ HCURSOR CeverytimemfcappDlg::OnQueryDragIcon()
 
 void CeverytimemfcappDlg::OnBnClickedButton1()
 {
-	//g_HttpMgr
+	g_ScheduleMgr.LoadINI();
+
 }
