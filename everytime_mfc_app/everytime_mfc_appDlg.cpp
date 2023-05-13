@@ -26,11 +26,11 @@ CeverytimemfcappDlg::CeverytimemfcappDlg(CWnd* pParent /*=nullptr*/)
 void CeverytimemfcappDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_LIST1, m_list1);
-	DDX_Control(pDX, IDC_LIST2, m_list2);
-	DDX_Control(pDX, IDC_LIST3, m_list3);
-	DDX_Control(pDX, IDC_LIST4, m_list4);
-	DDX_Control(pDX, IDC_LIST5, m_list5);
+	DDX_Control(pDX, IDC_MFCVSLISTBOX1, m_vslist1);
+	DDX_Control(pDX, IDC_MFCVSLISTBOX2, m_vslist2);
+	DDX_Control(pDX, IDC_MFCVSLISTBOX3, m_vslist3);
+	DDX_Control(pDX, IDC_MFCVSLISTBOX4, m_vslist4);
+	DDX_Control(pDX, IDC_MFCVSLISTBOX5, m_vslist5);
 }
 
 BEGIN_MESSAGE_MAP(CeverytimemfcappDlg, CDialogEx)
@@ -41,15 +41,9 @@ END_MESSAGE_MAP()
 
 
 // CeverytimemfcappDlg 메시지 처리기
-bool IsFirst = false;
 BOOL CeverytimemfcappDlg::OnInitDialog()
 {
 	//초기
-	if (IsFirst == false)
-	{
-		IsFirst = true;
-		g_ScheduleMgr.LoadINI();
-	}
 
 
 	CDialogEx::OnInitDialog();
@@ -111,7 +105,7 @@ void CeverytimemfcappDlg::OnBnClickedLoadTimetable()
 	for (int i = 0; i < kList.size(); i++)
 	{
 		const sLectures& rkLecture = kList[i];
-		m_list1.AddString(rkLecture.szLecturesName);
+		m_vslist1.AddItem(rkLecture.szLecturesName);
 	}
 	kList.clear();
 
@@ -119,7 +113,7 @@ void CeverytimemfcappDlg::OnBnClickedLoadTimetable()
 	for (int i = 0; i < kList.size(); i++)
 	{
 		const sLectures& rkLecture = kList[i];
-		m_list2.AddString(rkLecture.szLecturesName);
+		m_vslist2.AddItem(rkLecture.szLecturesName);
 	}
 	kList.clear();
 
@@ -127,7 +121,7 @@ void CeverytimemfcappDlg::OnBnClickedLoadTimetable()
 	for (int i = 0; i < kList.size(); i++)
 	{
 		const sLectures& rkLecture = kList[i];
-		m_list3.AddString(rkLecture.szLecturesName);
+		m_vslist3.AddItem(rkLecture.szLecturesName);
 	}
 	kList.clear();
 
@@ -135,7 +129,7 @@ void CeverytimemfcappDlg::OnBnClickedLoadTimetable()
 	for (int i = 0; i < kList.size(); i++)
 	{
 		const sLectures& rkLecture = kList[i];
-		m_list4.AddString(rkLecture.szLecturesName);
+		m_vslist4.AddItem(rkLecture.szLecturesName);
 	}
 	kList.clear();
 
@@ -143,7 +137,7 @@ void CeverytimemfcappDlg::OnBnClickedLoadTimetable()
 	for (int i = 0; i < kList.size(); i++)
 	{
 		const sLectures& rkLecture = kList[i];
-		m_list5.AddString(rkLecture.szLecturesName);
+		m_vslist5.AddItem(rkLecture.szLecturesName);
 	}
 	kList.clear();
 }

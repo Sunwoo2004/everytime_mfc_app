@@ -32,9 +32,9 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedLoadTimetable();
-	CListBox m_list1;
-	CListBox m_list2;
-	CListBox m_list3;
-	CListBox m_list4;
-	CListBox m_list5;
+	CVSListBox m_vslist1;
+	CVSListBox m_vslist2;
+	CVSListBox m_vslist3;
+	CVSListBox m_vslist4;
+	CVSListBox m_vslist5;
 };

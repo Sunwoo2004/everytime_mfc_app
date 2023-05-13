@@ -6,6 +6,8 @@
 #include "framework.h"
 #include "everytime_mfc_app.h"
 #include "everytime_mfc_appDlg.h"
+#include "stdafx.h"
+#include "ScheduleManager.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -37,8 +39,18 @@ CEverytimeApp theApp;
 
 BOOL CEverytimeApp::InitInstance()
 {
-	CWinApp::InitInstance();
+	/*if (AllocConsole())
+	{
+		freopen("CONIN$", "rb", stdin);
+		freopen("CONOUT$", "wb", stdout);
+		freopen("CONOUT$", "wb", stderr);
+		std::ios::sync_with_stdio();
+	}
+	system("cls");*/
 
+	g_ScheduleMgr.LoadINI();
+
+	CWinApp::InitInstance();
 
 	// 대화 상자에 셸 트리 뷰 또는
 	// 셸 목록 뷰 컨트롤이 포함되어 있는 경우 셸 관리자를 만듭니다.
