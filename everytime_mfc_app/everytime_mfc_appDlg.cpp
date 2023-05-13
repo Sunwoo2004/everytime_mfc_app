@@ -6,6 +6,7 @@
 #include "everytime_mfc_appDlg.h"
 #include "afxdialogex.h"
 #include "ScheduleManager.h"
+#include <vector>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -25,19 +26,32 @@ CeverytimemfcappDlg::CeverytimemfcappDlg(CWnd* pParent /*=nullptr*/)
 void CeverytimemfcappDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_LIST1, m_list1);
+	DDX_Control(pDX, IDC_LIST2, m_list2);
+	DDX_Control(pDX, IDC_LIST3, m_list3);
+	DDX_Control(pDX, IDC_LIST4, m_list4);
+	DDX_Control(pDX, IDC_LIST5, m_list5);
 }
 
 BEGIN_MESSAGE_MAP(CeverytimemfcappDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_BUTTON1, &CeverytimemfcappDlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_LOAD_TIMETABLE, &CeverytimemfcappDlg::OnBnClickedLoadTimetable)
 END_MESSAGE_MAP()
 
 
 // CeverytimemfcappDlg 메시지 처리기
-
+bool IsFirst = false;
 BOOL CeverytimemfcappDlg::OnInitDialog()
 {
+	//초기
+	if (IsFirst == false)
+	{
+		IsFirst = true;
+		g_ScheduleMgr.LoadINI();
+	}
+
+
 	CDialogEx::OnInitDialog();
 
 	// 이 대화 상자의 아이콘을 설정합니다.  응용 프로그램의 주 창이 대화 상자가 아닐 경우에는
@@ -87,9 +101,49 @@ HCURSOR CeverytimemfcappDlg::OnQueryDragIcon()
 }
 
 
-
-void CeverytimemfcappDlg::OnBnClickedButton1()
+void CeverytimemfcappDlg::OnBnClickedLoadTimetable()
 {
-	g_ScheduleMgr.LoadINI();
 	g_ScheduleMgr.GetData();
+
+	vLecturesList kList;
+
+	g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_MONDAY);
+	for (int i = 0; i < kList.size(); i++)
+	{
+		const sLectures& rkLecture = kList[i];
+		m_list1.AddString(rkLecture.szLecturesName);
+	}
+	kList.clear();
+
+	g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_TUESDAY);
+	for (int i = 0; i < kList.size(); i++)
+	{
+		const sLectures& rkLecture = kList[i];
+		m_list2.AddString(rkLecture.szLecturesName);
+	}
+	kList.clear();
+
+	g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_WEDNESDAY);
+	for (int i = 0; i < kList.size(); i++)
+	{
+		const sLectures& rkLecture = kList[i];
+		m_list3.AddString(rkLecture.szLecturesName);
+	}
+	kList.clear();
+
+	g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_THURSDAY);
+	for (int i = 0; i < kList.size(); i++)
+	{
+		const sLectures& rkLecture = kList[i];
+		m_list4.AddString(rkLecture.szLecturesName);
+	}
+	kList.clear();
+
+	g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_FRIDAY);
+	for (int i = 0; i < kList.size(); i++)
+	{
+		const sLectures& rkLecture = kList[i];
+		m_list5.AddString(rkLecture.szLecturesName);
+	}
+	kList.clear();
 }

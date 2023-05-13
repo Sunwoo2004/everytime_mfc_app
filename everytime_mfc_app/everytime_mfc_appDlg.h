@@ -31,5 +31,10 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnBnClickedButton1();
+	afx_msg void OnBnClickedLoadTimetable();
+	CListBox m_list1;
+	CListBox m_list2;
+	CListBox m_list3;
+	CListBox m_list4;
+	CListBox m_list5;
 };

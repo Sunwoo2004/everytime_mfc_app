@@ -117,13 +117,13 @@ void HttpManager::Init()
 {
 }
 
-std::wstring ConvertToWideString(const std::string& input)
+std::wstring HttpManager::ConvertToWideString(const std::string& input)
 {
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 	return converter.from_bytes(input);
 }
 
-std::string ConvertToMultiByteString(const std::wstring& input, UINT codePage)
+std::string HttpManager::ConvertToMultiByteString(const std::wstring& input, UINT codePage)
 {
 	int multiByteStrLen = WideCharToMultiByte(codePage, 0, input.c_str(), -1, nullptr, 0, nullptr, nullptr);
 	if (multiByteStrLen == 0)
