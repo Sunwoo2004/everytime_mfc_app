@@ -91,5 +91,5 @@ HCURSOR CeverytimemfcappDlg::OnQueryDragIcon()
 void CeverytimemfcappDlg::OnBnClickedButton1()
 {
 	g_ScheduleMgr.LoadINI();
-
+	g_ScheduleMgr.GetData();
 }

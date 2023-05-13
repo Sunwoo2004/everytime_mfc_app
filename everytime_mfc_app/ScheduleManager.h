@@ -2,9 +2,10 @@
 class ScheduleManager
 {
 private:
-	char szUrl[1024];
+	char m_szUrl[1024];
 public:
 	bool LoadINI();
+	bool GetData();
 public:
 	static ScheduleManager& GetInstance();
 private:
