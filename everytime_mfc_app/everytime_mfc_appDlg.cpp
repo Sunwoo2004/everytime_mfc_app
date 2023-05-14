@@ -37,6 +37,7 @@ BEGIN_MESSAGE_MAP(CeverytimemfcappDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_LOAD_TIMETABLE, &CeverytimemfcappDlg::OnBnClickedLoadTimetable)
+	ON_BN_CLICKED(IDC_CLOSE_PROGRAM, &CeverytimemfcappDlg::OnBnClickedCloseProgram)
 END_MESSAGE_MAP()
 
 
@@ -99,8 +100,11 @@ void CeverytimemfcappDlg::OnBnClickedLoadTimetable()
 {
 	g_ScheduleMgr.GetData();
 
+	int itemCount = m_vslist1.GetCount();
+
 	vLecturesList kList;
 
+	kList.clear();
 	g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_MONDAY);
 	for (int i = 0; i < kList.size(); i++)
 	{
@@ -140,4 +144,10 @@ void CeverytimemfcappDlg::OnBnClickedLoadTimetable()
 		m_vslist5.AddItem(rkLecture.szLecturesName);
 	}
 	kList.clear();
+}
+
+
+void CeverytimemfcappDlg::OnBnClickedCloseProgram()
+{
+	::SendMessage(this->m_hWnd, WM_CLOSE, NULL, NULL);
 }

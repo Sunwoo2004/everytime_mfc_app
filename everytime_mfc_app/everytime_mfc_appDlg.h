@@ -37,4 +37,5 @@ public:
 	CVSListBox m_vslist3;
 	CVSListBox m_vslist4;
 	CVSListBox m_vslist5;
+	afx_msg void OnBnClickedCloseProgram();
 };
