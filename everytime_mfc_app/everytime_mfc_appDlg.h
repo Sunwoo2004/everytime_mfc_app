@@ -32,10 +32,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedLoadTimetable();
-	CVSListBox m_vslist1;
-	CVSListBox m_vslist2;
-	CVSListBox m_vslist3;
-	CVSListBox m_vslist4;
-	CVSListBox m_vslist5;
 	afx_msg void OnBnClickedCloseProgram();
+	CStatic m_PictureControl;
 };
