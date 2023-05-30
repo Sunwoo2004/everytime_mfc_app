@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include <string>
 enum eWeekly
 {
 	WK_MONDAY = 1, //¿ù
@@ -46,7 +45,7 @@ public:
 	bool GetDataByINI();
 	void GetLecturesByDay(vLecturesList &rkLecturesList, eWeekly week);
 	bool GetLecturesByTime(vLecturesList& rkLecturesList, int iTime , sLectures & kLectures);
-	void SaveINI(std::string szHTML);
+	void SaveDataINI(char * szHTML);
 public:
 	static ScheduleManager& GetInstance();
 private:

@@ -32,7 +32,7 @@ void ScheduleManager::Init()
 
 bool ScheduleManager::LoadINI()
 {
-	char szBuf[1024];
+	char szBuf[2048];
 	INILoader kLoader("C:\\Users\\Admin\\Desktop\\everytime.ini");
 	kLoader.SetTitle("common");
 	kLoader.LoadString("url", "", szBuf, sizeof(szBuf));
@@ -47,17 +47,23 @@ bool ScheduleManager::LoadINI()
 	return true;
 }
 
-void ScheduleManager::SaveINI(std::string szHTML)
+void ScheduleManager::SaveDataINI(char* szHTML)
 {
-	INILoader kLoader("C:/Users/Admin/Desktop/everytime_mfc_app.ini");
+	/*INILoader kLoader("C:/Users/Admin/Desktop/everytime_mfc_app.ini");
 	kLoader.SetTitle("common");
-	kLoader.SaveString("htmldata", szHTML.c_str());
+	kLoader.SaveString("htmldata", szHTML);*/
+
+	std::ofstream outfile;
+	outfile.open("C:/Users/Admin/Desktop/everytime_mfc_app.ini");
+	outfile << "[common]" << std::endl;
+	outfile << "htmldata = " << szHTML << "|" << std::endl;
+	outfile.close();
 }
 
 bool ScheduleManager::GetDataByINI()
 {
 	m_vLecturesList.clear();
-	char szBuf[1024];
+	char szBuf[2048];
 	INILoader kLoader(/*"config/everytime_mfc_app.ini"*/"C:/Users/Admin/Desktop/everytime_mfc_app.ini");
 	kLoader.SetTitle("common");
 	kLoader.LoadString("htmldata", "", szBuf, sizeof(szBuf));
@@ -68,6 +74,7 @@ bool ScheduleManager::GetDataByINI()
 	}
 
 	std::string szHTML = szBuf;
+	//::MessageBoxA(NULL, szHTML.c_str(), "123", NULL);
 
 	std::vector<std::string> tokens1;
 
@@ -79,7 +86,7 @@ bool ScheduleManager::GetDataByINI()
 		tokens1.push_back(token1);
 	}
 
-	for (int i = 0; i < tokens1.size() - 1; i++)
+	for (int i = 0; i < tokens1.size() - 1; i++) //for 문 돌릴때 마지막 | 뒤는 NULL 값이므로 빼자
 	{
 		const std::string& rkToken = tokens1[i];
 		std::istringstream iss2(rkToken);
@@ -114,6 +121,7 @@ bool ScheduleManager::GetDataByINI()
 			k++;
 		}
 		m_vLecturesList.push_back(kLectures);
+		//::MessageBoxA(NULL, kLectures.szLecturesName, "ad", NULL);
 	}
 
 	return true;
@@ -128,7 +136,9 @@ bool ScheduleManager::GetData()
 	}
 
 	std::string szHTML = g_HttpMgr.GetHTML(m_szUrl);
-	SaveINI(szHTML);
+	//::MessageBoxA(NULL, szHTML.c_str(), "1234", NULL);
+	SaveDataINI((char*)szHTML.c_str());
+
 	std::vector<std::string> tokens1;
 
 	std::istringstream iss1(szHTML);

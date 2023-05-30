@@ -88,7 +88,16 @@ HCURSOR CeverytimemfcappDlg::OnQueryDragIcon()
 
 void CeverytimemfcappDlg::OnBnClickedLoadTimetable()
 {
-	OnLoadTimeTable(true);
+	int iResult = ::MessageBoxA(NULL, "시간표를 새로 로드 하시겠습니까?", "[Notice] everytime_mfc_app", MB_YESNO);
+	if (iResult == IDYES)
+	{
+		//g_ScheduleMgr.GetData();
+		OnLoadTimeTable(true);
+	}
+	else if (iResult == IDNO)
+	{
+		return;
+	}
 }
 
 
@@ -142,7 +151,6 @@ void CeverytimemfcappDlg::OnCopyEditBox(int iIndex, int iLeft, int iTop, char* s
 	int g = HIWORD(wParam); // 초록 값
 	int b = LOWORD(lParam); // 파랑 값
 
-	// 배경색 변경 로직 작성
 	/*CBrush bkBrush;
 	RECT ctrlRect;
 	COLORREF crBk = RGB(r, g, b);
@@ -174,7 +182,7 @@ void CeverytimemfcappDlg::OnLoadTimeTable(bool bNew = false)
 {
 	if (bNew)
 	{
-		g_ScheduleMgr.GetData();
+		g_ScheduleMgr.GetData(); //얻고 저장까지..
 	}
 	else
 	{
@@ -197,6 +205,9 @@ void CeverytimemfcappDlg::OnLoadTimeTable(bool bNew = false)
 
 	kList.clear();
 
+	//char szBuf1[2048] = "";
+
+
 	int iIndex = 0;
 	for (int i = 0; i < 5; i++)
 	{
@@ -205,37 +216,31 @@ void CeverytimemfcappDlg::OnLoadTimeTable(bool bNew = false)
 			int iPosX = i * 126;
 			int iPosY = j * 60;
 
-			if (i == 0)
+			switch (i)
 			{
+			case 0:
 				g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_MONDAY);
-				//월
-			}
-			else if (i == 1)
-			{
+				break;
+			case 1:
 				g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_TUESDAY);
-				//화
-			}
-			else if (i == 2)
-			{
+				break;
+			case 2:
 				g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_WEDNESDAY);
-				//수
-			}
-			else if (i == 3)
-			{
+				break;
+			case 3:
 				g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_THURSDAY);
-				//목
-			}
-			else
-			{
+				break;
+			default:
 				g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_FRIDAY);
-				//금
+				break;
 			}
 
 			sLectures kLectures;
 			if (g_ScheduleMgr.GetLecturesByTime(kList, j + 9, kLectures))
 			{
 				char szBuf[256];
-				sprintf(szBuf, "%s\r\n%s\r\n%s", kLectures.szLecturesName, kLectures.szProfessor, kLectures.szLectureRoom);
+				sprintf(szBuf, "%s\r\n%s\r\n%s\r\n", kLectures.szLecturesName, kLectures.szProfessor, kLectures.szLectureRoom);
+				//strcat(szBuf1, szBuf);
 				if (kLectures.iLecturesTime > 1)
 				{
 					OnCopyEditBox(iIndex, 127 + iPosX, 51 + iPosY, szBuf, TRUE); //127 인덱스1 아래로 쭉 내려간다.
@@ -251,4 +256,6 @@ void CeverytimemfcappDlg::OnLoadTimeTable(bool bNew = false)
 			iIndex++;
 		}
 	}
+
+	//::MessageBoxA(NULL, szBuf1, "123", NULL);
 }
