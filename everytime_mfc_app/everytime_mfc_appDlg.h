@@ -5,6 +5,9 @@
 #pragma once
 
 
+
+
+
 // CeverytimemfcappDlg 대화 상자
 class CeverytimemfcappDlg : public CDialogEx
 {
@@ -36,5 +39,7 @@ public:
 	CStatic m_PictureControl;
 	CEdit m_timetable_base;
 	CEdit m_timetables[40];
-	void OnCopyEditBox(int iIndex, int iLeft, int iTop, char * szText);
+	void OnLoadTimeTable(bool bNew);
+	void OnCopyEditBox(int iIndex, int iLeft, int iTop, char * szText, BOOL bMulti = FALSE);
+	/*void*/LRESULT OnChangeBackGroundColor(/*int iIndex, int r, int g, int b*/WPARAM wParam, LPARAM lParam);
 };

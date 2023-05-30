@@ -22,6 +22,9 @@
     <Filter Include="INILoader">
       <UniqueIdentifier>{d1f67464-5db4-479d-a6a0-6fe9f6891f01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{09d4e721-bded-4b48-9bea-f684d0b83c70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="everytime_mfc_app.h">
@@ -53,6 +56,9 @@
     </ClInclude>
     <ClInclude Include="INILoader.h">
       <Filter>INILoader</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
