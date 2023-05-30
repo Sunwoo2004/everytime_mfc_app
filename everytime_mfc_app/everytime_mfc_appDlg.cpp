@@ -91,7 +91,12 @@ void CeverytimemfcappDlg::OnBnClickedLoadTimetable()
 	int iResult = ::MessageBoxA(NULL, "시간표를 새로 로드 하시겠습니까?", "[Notice] everytime_mfc_app", MB_YESNO);
 	if (iResult == IDYES)
 	{
-		//g_ScheduleMgr.GetData();
+		g_ScheduleMgr.LoadINI();
+
+		for (int i = 0; i < 40; i++)
+		{
+			m_timetables[i].DestroyWindow();
+		}
 		OnLoadTimeTable(true);
 	}
 	else if (iResult == IDNO)
