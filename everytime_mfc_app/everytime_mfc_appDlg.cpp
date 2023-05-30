@@ -21,6 +21,7 @@ void CeverytimemfcappDlg::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_PICTURE_STATIC, m_PictureControl);
 
+	DDX_Control(pDX, IDC_TIMETABLE_BASE, m_timetable_base);
 }
 
 BEGIN_MESSAGE_MAP(CeverytimemfcappDlg, CDialogEx)
@@ -79,56 +80,82 @@ HCURSOR CeverytimemfcappDlg::OnQueryDragIcon()
 
 void CeverytimemfcappDlg::OnBnClickedLoadTimetable()
 {
-	/*g_ScheduleMgr.GetData();
-
-	int itemCount = m_vslist1.GetCount();
+	g_ScheduleMgr.GetData();
 
 	vLecturesList kList;
 
 	kList.clear();
-	g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_MONDAY);
-	for (int i = 0; i < kList.size(); i++)
-	{
-		const sLectures& rkLecture = kList[i];
-		m_vslist1.AddItem(rkLecture.szLecturesName);
-	}
-	kList.clear();
 
-	g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_TUESDAY);
-	for (int i = 0; i < kList.size(); i++)
+	int iIndex = 0;
+	for (int i = 0; i < 5; i++)
 	{
-		const sLectures& rkLecture = kList[i];
-		m_vslist2.AddItem(rkLecture.szLecturesName);
-	}
-	kList.clear();
+		for (int j = 0; j < 8; j++)
+		{
+			int iPosX = i * 126;
+			int iPosY = j * 60;
 
-	g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_WEDNESDAY);
-	for (int i = 0; i < kList.size(); i++)
-	{
-		const sLectures& rkLecture = kList[i];
-		m_vslist3.AddItem(rkLecture.szLecturesName);
-	}
-	kList.clear();
+			if (i == 0)
+			{
+				g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_MONDAY);
+				//월
+			}
+			else if (i == 1)
+			{
+				g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_TUESDAY);
+				//화
+			}
+			else if (i == 2)
+			{
+				g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_WEDNESDAY);
+				//수
+			}
+			else if (i == 3)
+			{
+				g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_THURSDAY);
+				//목
+			}
+			else
+			{
+				g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_FRIDAY);
+				//금
+			}
 
-	g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_THURSDAY);
-	for (int i = 0; i < kList.size(); i++)
-	{
-		const sLectures& rkLecture = kList[i];
-		m_vslist4.AddItem(rkLecture.szLecturesName);
-	}
-	kList.clear();
+			sLectures kLectures;
+			if (g_ScheduleMgr.GetLecturesByTime(kList, j + 9, kLectures))
+			{
+				char szBuf[256];
+				sprintf(szBuf, "%s\r\n%s\r\n%s", kLectures.szLecturesName, kLectures.szProfessor, kLectures.szLectureRoom);
+				OnCopyEditBox(iIndex, 127 + iPosX, 51 + iPosY, szBuf); //127 인덱스1 아래로 쭉 내려간다.
+			}
 
-	g_ScheduleMgr.GetLecturesByDay(kList, eWeekly::WK_FRIDAY);
-	for (int i = 0; i < kList.size(); i++)
-	{
-		const sLectures& rkLecture = kList[i];
-		m_vslist5.AddItem(rkLecture.szLecturesName);
+			kList.clear();
+
+			iIndex++;
+		}
 	}
-	kList.clear();*/
 }
 
 
 void CeverytimemfcappDlg::OnBnClickedCloseProgram()
 {
 	::SendMessage(this->m_hWnd, WM_CLOSE, NULL, NULL);
+}
+
+void CeverytimemfcappDlg::OnCopyEditBox(int iIndex, int iLeft, int iTop, char* szText)
+{
+	DWORD style = m_timetable_base.GetStyle();
+	style |= ES_MULTILINE;
+	DWORD exStyle = m_timetable_base.GetExStyle();
+	CFont* pFont = m_timetable_base.GetFont();
+	CRect rect;
+	m_timetable_base.GetWindowRect(&rect);
+	ScreenToClient(&rect);
+
+	rect.left = iLeft; // Edit Control의 왼쪽 X 좌표
+	rect.top = iTop; // Edit Control의 상단 Y 좌표
+	rect.right = rect.left + 124; // Edit Control의 오른쪽 X 좌표
+	rect.bottom = rect.top + 59; // Edit Control의 하단 Y 좌표
+
+	m_timetables[iIndex].CreateEx(exStyle, "EDIT", szText, style, rect, this, IDC_TIMETABLE_BASE);
+	m_timetables[iIndex].SetFont(pFont);
 }

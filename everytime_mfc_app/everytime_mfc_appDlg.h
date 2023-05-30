@@ -34,4 +34,7 @@ public:
 	afx_msg void OnBnClickedLoadTimetable();
 	afx_msg void OnBnClickedCloseProgram();
 	CStatic m_PictureControl;
+	CEdit m_timetable_base;
+	CEdit m_timetables[40];
+	void OnCopyEditBox(int iIndex, int iLeft, int iTop, char * szText);
 };

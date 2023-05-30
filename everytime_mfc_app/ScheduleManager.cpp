@@ -119,3 +119,18 @@ void ScheduleManager::GetLecturesByDay(vLecturesList& rkLecturesList, eWeekly we
 		rkLecturesList.push_back(rkLectures);
 	}
 }
+
+bool ScheduleManager::GetLecturesByTime(vLecturesList& rkLecturesList, int iTime , sLectures& kLectures)
+{
+	int iCnt = rkLecturesList.size();
+	for (int i = 0; i < iCnt; i++)
+	{
+		const sLectures& rkLectures = rkLecturesList[i];
+		if (rkLectures.iStartTime == iTime)
+		{
+			kLectures = rkLectures;
+			return true;
+		}
+	}
+	return false;
+}

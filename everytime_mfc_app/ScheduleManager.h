@@ -43,6 +43,7 @@ public:
 	bool LoadINI();
 	bool GetData();
 	void GetLecturesByDay(vLecturesList &rkLecturesList, eWeekly week);
+	bool GetLecturesByTime(vLecturesList& rkLecturesList, int iTime , sLectures & kLectures);
 public:
 	static ScheduleManager& GetInstance();
 private:
